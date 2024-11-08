@@ -1,13 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#14b8a6" />
+    <meta name="description" content="Your app description here" />
+    <meta name="keywords" content="keywords, for, your, app" />
+    <meta name="author" content="Your Name" />
+
+    <title>Wisp Messaging App</title>
+
+    <!-- Link to your icon files -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/icon-192x192.png"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <style>
+      /* Optional: Customize your app's CSS here */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        color: #333;
+      }
+    </style>
+
+    <script>
+      if ("standalone" in window.navigator && window.navigator.standalone) {
+        document.documentElement.style.display = "standalone";
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Your app's main JavaScript file -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

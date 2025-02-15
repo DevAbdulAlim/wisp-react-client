@@ -56,8 +56,8 @@ const SideNavbar: React.FC<{
             to={item.path}
             className={({ isActive }) =>
               isActive
-                ? "flex items-center p-3 text-white bg-blue-500 rounded-lg"
-                : "flex items-center p-3 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors duration-200 rounded-lg"
+                ? "flex items-center p-3 text-white bg-teal-500 rounded-lg"
+                : "flex items-center p-3 text-gray-600 hover:bg-teal-100 hover:text-teal-600 transition-colors duration-200 rounded-lg"
             }
             onClick={toggleSidebar}
           >

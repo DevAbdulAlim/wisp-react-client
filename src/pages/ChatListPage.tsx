@@ -66,7 +66,7 @@ const ChatListPage: React.FC = () => {
 
   return (
     <div className="relative flex flex-col h-full w-full md:w-96 bg-gray-50 shadow-lg overflow-hidden">
-      <header className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md">
+      <header className="flex items-center justify-between p-4 bg-teal-500  text-white shadow-md">
         <div className="relative">
           <button onClick={toggleSidebar} className="text-2xl">
             <AiOutlineMenu />
@@ -104,7 +104,7 @@ const ChatListPage: React.FC = () => {
               <div className="flex flex-col items-end">
                 <div className="text-gray-500 text-sm">{chat.timestamp}</div>
                 {chat.unreadCount && (
-                  <span className="mt-1 bg-red-500 text-white text-xs font-semibold rounded-full px-2 py-1">
+                  <span className="mt-1 bg-teal-500 text-white text-xs font-semibold rounded-full px-2 py-1">
                     {chat.unreadCount}
                   </span>
                 )}
@@ -114,7 +114,7 @@ const ChatListPage: React.FC = () => {
         ))}
       </div>
       <button
-        className="absolute bottom-6 right-6 bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-full shadow-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none"
+        className="absolute bottom-6 right-6 bg-gradient-to-r from-teal-500 to-teal-600 p-4 rounded-full shadow-lg hover:from-teal-600 hover:to-teal-700 focus:outline-none"
         title="Add New Chat or Group"
       >
         <AiOutlinePlus className="text-2xl text-white" />

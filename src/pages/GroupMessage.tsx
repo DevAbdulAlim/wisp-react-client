@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlinePaperClip,
   AiOutlineVideoCamera,
@@ -15,26 +15,28 @@ import { io, Socket } from "socket.io-client";
 
 const socket: Socket = io();
 
-const MessagesPage: React.FC = () => {
-  const { chatId } = useParams<{ chatId: string }>();
+const GroupMessage: React.FC = () => {
+  const { room } = useParams<{ room: string }>();
+  const [messages, setMessages] = useState<string[]>([]);
   const [message, setMessage] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [room, setRoom] = useState("room 1");
 
   const handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle message sending
+    socket.emit("room message", { room: room, message: message });
     setMessage("");
-    joinRoom();
     setIsTyping(false);
   };
 
-  const joinRoom = () => {
-    if (room.trim()) {
+  useEffect(() => {
+    if (room && room.trim()) {
       socket.emit("join room", room);
     }
-  };
+    socket.on("room message", (message: string) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, [room]);
 
   const handleEmojiSelect = (emoji: any) => {
     setMessage(message + emoji.native);
@@ -49,7 +51,7 @@ const MessagesPage: React.FC = () => {
           </Link>
           <FaUserCircle className="text-3xl text-gray-400" />
           <div className="ml-3">
-            <h2 className="text-lg font-semibold">Chat {chatId}</h2>
+            <h2 className="text-lg font-semibold">Group {room}</h2>
             <p className="text-gray-500 text-sm">Online</p>
           </div>
         </div>
@@ -67,16 +69,19 @@ const MessagesPage: React.FC = () => {
       </header>
       <div className="flex-grow overflow-y-auto p-4">
         {/* Message bubbles go here */}
-        <div className="flex items-start mb-4">
-          <FaUserCircle className="text-3xl text-gray-400" />
-          <div className="ml-3">
-            <div className="bg-white p-3 rounded-lg shadow-md">
-              <p className="text-gray-800">Hello, how are you?</p>
+        {messages &&
+          messages.map((m, index) => (
+            <div key={index} className="flex items-start mb-4">
+              <FaUserCircle className="text-3xl text-gray-400" />
+              <div className="ml-3">
+                <div className="bg-white p-3 rounded-lg shadow-md">
+                  <p className="text-gray-800">{m}</p>
+                </div>
+                <span className="text-gray-500 text-xs mt-1">2:30 PM</span>
+              </div>
             </div>
-            <span className="text-gray-500 text-xs mt-1">2:30 PM</span>
-          </div>
-        </div>
-        <div className="flex items-end justify-end mb-4">
+          ))}
+        {/* <div className="flex items-end justify-end mb-4">
           <div className="mr-3 text-right">
             <div className="bg-teal-500 text-white p-3 rounded-lg shadow-md">
               <p>I am fine, thank you!</p>
@@ -84,7 +89,7 @@ const MessagesPage: React.FC = () => {
             <span className="text-gray-500 text-xs mt-1">2:32 PM</span>
           </div>
           <FaUserCircle className="text-3xl text-gray-400" />
-        </div>
+        </div> */}
         {isTyping && <p className="text-gray-500 text-xs mb-4">Typing...</p>}
       </div>
       <footer className="p-4 bg-white border-t border-gray-300 flex items-center">
@@ -124,4 +129,4 @@ const MessagesPage: React.FC = () => {
   );
 };
 
-export default MessagesPage;
+export default GroupMessage;

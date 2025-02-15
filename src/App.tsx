@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import MessagesPage from "./pages/MessagesPage";
 import HomePage from "./pages/homePage";
+import CreateRoom from "./pages/CreateRoom";
+import GroupMessage from "./pages/GroupMessage";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +15,8 @@ const App: React.FC = () => {
           <Route path="chats/:chatId" element={<MessagesPage />} />
           <Route path="profile" element={<div>Profile Page</div>} />
           <Route path="contacts" element={<div>Contacts Page</div>} />
-          <Route path="new-group" element={<div>New Group Page</div>} />
+          <Route path="new-group" element={<CreateRoom />} />
+          <Route path="groups/:room" element={<GroupMessage />} />
           <Route
             path="saved-messages"
             element={<div>Saved Messages Page</div>}
